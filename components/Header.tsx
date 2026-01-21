@@ -19,7 +19,7 @@ export const Header = () => {
             <Box>
               <HStack space='md' className=''>
                 <FontAwesome5 name='menorah' size={24} color='white' />
-                <Text className='text-jewish-primary-foreground text-2xl font-bold font-jakarta'>
+                <Text className='text-jewish-primary-foreground text-2xl font-bold font-display '>
                   Moedim
                 </Text>
               </HStack>
