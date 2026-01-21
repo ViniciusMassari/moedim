@@ -1,5 +1,9 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -7,6 +11,9 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
+
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import '@/global.css';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -24,6 +31,13 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    PlusJakartaSans: require('../assets/fonts/PlusJakartaSans-Medium.ttf'),
+    PlusJakartaSansBold: require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
+    PlusJakartaSansExtraBold: require('../assets/fonts/PlusJakartaSans-ExtraBold.ttf'),
+    PlusJakartaSansSemi: require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
+    DmSans: require('../assets/fonts/DMSans-Regular.ttf'),
+    DmSansMedium: require('../assets/fonts/DMSans-Medium.ttf'),
+    DmSansSemi: require('../assets/fonts/DMSans-SemiBold.ttf'),
     ...FontAwesome.font,
   });
 
@@ -49,11 +63,13 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    // Mude o tema aqui
+    <GluestackUIProvider mode='light'>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+        </Stack>
+      </ThemeProvider>
+    </GluestackUIProvider>
   );
 }
